@@ -1,9 +1,12 @@
 import React from 'react'
+import Todo from './Todo'
 
-const TodoList = () => {
+const TodoList = (props) => {
     return (
         <div>
-            hello
+            <Todo state={props.state}/>
+
+            <button>Clear Todo</button>
         </div>
     )
 }

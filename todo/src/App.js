@@ -1,25 +1,26 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
+import { todoReducer, initialState } from './reducers/todoReducer';
 import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 
-const initialState = {
-    item: 'Learn about reducers',
-    completed: false,
-    id: 3892987589
-}
-
-const reducer = (state, action) => {
 
 
-}
+
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [todo, setTodo] = useState('');
+  const [state, dispatch] = useReducer(todoReducer, initialState);
 
-  const handleChanges = e => {
-    setTodo(e.target.value)
+  const toggleTodo = (id) => {
+    dispatch({type: 'TOGGLE_TODO', payload: id})
+  }
+
+  const addNewTodo = (id) => {
+    dispatch({type: 'ADD_TODO', payload: id});
+  } 
+
+  const clearTodo = (id) => {
+    dispatch({type: 'CLEAR_TODO', payload: id})
   }
 
 
@@ -28,22 +29,8 @@ const App = () => {
     <div className="App">
 
       <h2>Welcome to your Reducer-Todo App</h2>
-      <form>
-        <div>
-          <input type='text' value={todo} onChange={handleChanges}/>
-          <button>Add Todo</button>
-        </div>
-        <div>
-          <div>
-            {}
-          </div>
-          <button>Clear Todo</button>
-        </div>
-          
-      </form>
-      
-      <TodoForm />
-      <TodoList />
+      <TodoForm addNewTodo={addNewTodo} />
+      <TodoList state={state} toggleTodo={toggleTodo} clearTodo={clearTodo}/>
     </div>
   );
 }

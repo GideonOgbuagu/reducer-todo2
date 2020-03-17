@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Todo = () => {
+const Todo = (props) => {
     return (
         <div>
-            <TodoForm />
+            <p>{props.state.todos.item}</p>
         </div>
     )
 }
